@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Locale;
 
 import static lombok.AccessLevel.PROTECTED;
@@ -42,5 +42,5 @@ public class Details {
     @Column(nullable = false)
     @Setter
     @NonNull
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 }

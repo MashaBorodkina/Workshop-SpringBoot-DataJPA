@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
-@ToString (exclude = {"password", "details"})
+@ToString (exclude = {"password", "userDetails"})
 @NoArgsConstructor(access = PROTECTED)
 @RequiredArgsConstructor
 
@@ -35,7 +36,7 @@ public class AppUser {
 
     @Column(nullable = false)
     @Setter(AccessLevel.NONE)
-    private LocalDateTime regDate;
+    private LocalDate regDate;
 
     @OneToOne (cascade = CascadeType.ALL, optional = false)
     @JoinColumn(nullable = false, unique = true, name="details_id")
@@ -44,7 +45,7 @@ public class AppUser {
 
     @PrePersist
     private void onCreate(){
-        this.regDate = LocalDateTime.now();
+        this.regDate = LocalDate.now();
     }
 
 }

@@ -18,8 +18,8 @@ public interface AppUserRepository extends CrudRepository<AppUser,Long> {
     @Query("SELECT a FROM AppUser a WHERE a.regDate>:start AND a.regDate<:end")
     List<AppUser> findByDate(@Param("start") LocalDate start, @Param("end") LocalDate end);
 
-    @Query("SELECT a FROM AppUser a WHERE a.userDetails.id=:detailId")
-    Optional<AppUser> findByDetailsId(@Param("detailId") Long detailId);//second way
+    //@Query("SELECT a FROM AppUser a WHERE a.userDetails.id=:detailId")
+    //Optional<AppUser> findByDetailsId(@Param("detailId") Long detailId);//second way
 
     //@Query("SELECT a FROM AppUser a JOIN a.details d WHERE lower(d.email)= lower(:email)")
     //Optional<AppUser> findByDetailsEmail(@Param("email") String email);//second way

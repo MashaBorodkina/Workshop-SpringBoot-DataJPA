@@ -24,5 +24,5 @@ public interface AppUserRepository extends CrudRepository<AppUser,Long> {
     //@Query("SELECT a FROM AppUser a JOIN a.details d WHERE lower(d.email)= lower(:email)")
     //Optional<AppUser> findByDetailsEmail(@Param("email") String email);//second way
 
-
+    boolean existsByUsername(String username);
 }

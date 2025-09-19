@@ -49,4 +49,19 @@ public class DetailRepositoryTest {
         assertThat(found.size()).isEqualTo(1);
         assertThat(found.get(0).getName()).isEqualTo("Maria");
     }
+    @Test
+    @DisplayName("find Maria by birth date")
+    void findByBirthDate() {
+        detailsRepository.save(new Details("maria@email.se", "Maria", LocalDate.of(1995,1,1)));
+        List<Details> found = detailsRepository.findByBirthDateBetween(LocalDate.of(1994,12,1), LocalDate.of(2000,2,2));
+        assertThat(found.size()).isEqualTo(1);
+    }
+    @Test
+    @DisplayName("find Maria by Month birthday")
+    void findByMonthBirthday() {
+        detailsRepository.save(new Details("maria@email.se", "Maria", LocalDate.of(1995,1,1)));
+        List<Details> found = detailsRepository.findByMonth(1);
+        assertThat(found.size()).isEqualTo(1);
+        assertThat(found.get(0).getName().equals("Maria"));
+    }
 }

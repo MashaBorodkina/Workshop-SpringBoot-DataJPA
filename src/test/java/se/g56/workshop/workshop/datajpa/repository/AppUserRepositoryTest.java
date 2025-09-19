@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import se.g56.workshop.workshop.datajpa.entity.AppUser;
 import se.g56.workshop.workshop.datajpa.entity.Details;
 import se.g56.workshop.workshop.datajpa.repo.AppUserRepository;
@@ -91,5 +92,21 @@ public class AppUserRepositoryTest {
             assertThat(u.getId()).isNotNull();
             assertThat(u.getUsername()).isEqualTo("mariboro");
         });
+    }
+    @Test
+    @DisplayName("existsByUsername returns true for existing username")
+    void testExistsByUsername(){
+        Details details = new Details("exampe@email.se", "Maria", LocalDate.of(1995, 1, 1));
+        AppUser appUser = new AppUser("mariboro", "password", details);
+        appUserRepository.save(appUser);
+
+        boolean result = appUserRepository.existsByUsername("mariboro");
+        assertThat(result).isTrue();
+    }
+    @Test
+    @DisplayName("existsByUsername returns false for non-existing username")
+    void testExistsByUsername_false(){
+        boolean result = appUserRepository.existsByUsername("mariboro");
+        assertThat(result).isFalse();
     }
 }

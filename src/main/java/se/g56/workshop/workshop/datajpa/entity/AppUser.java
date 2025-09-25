@@ -18,7 +18,7 @@ import static lombok.AccessLevel.PROTECTED;
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
+    @Column(name="user_id", nullable = false, updatable = false)
     @Setter(AccessLevel.NONE)
     private Long id;
 

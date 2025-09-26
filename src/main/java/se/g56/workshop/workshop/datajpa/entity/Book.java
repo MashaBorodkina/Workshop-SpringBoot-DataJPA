@@ -2,12 +2,15 @@ package se.g56.workshop.workshop.datajpa.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.Set;
+
+import java.util.HashSet;
 
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
-@ToString
+@ToString(exclude = "authors")
 @NoArgsConstructor(access = PROTECTED)
 @RequiredArgsConstructor(access = PROTECTED)
 
@@ -33,4 +36,18 @@ public class Book {
     @NonNull
     @Setter
     private int maxLoanDays;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name="book_author",
+    joinColumns = @JoinColumn(name="book_id", foreignKey = @ForeignKey(name = "fk_ba_book")),
+    inverseJoinColumns = @JoinColumn(name="author_id", foreignKey = @ForeignKey(name="fk_ba_author")),
+    uniqueConstraints = @UniqueConstraint(name = "uk_book_author", columnNames = {"book_id", "author_id"}))
+    private Set<Author> authors = new HashSet<>();
+
+    public void addAuthor(Author a) {
+        if (authors.add(a)) a.getWrittenBooks().add(this);
+    }
+    public void removeAuthor(Author a) {
+        if (authors.remove(a)) a.getWrittenBooks().remove(this);
+    }
 }

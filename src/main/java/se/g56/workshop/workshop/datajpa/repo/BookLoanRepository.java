@@ -1,7 +1,6 @@
 package se.g56.workshop.workshop.datajpa.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Meta;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -9,7 +8,6 @@ import se.g56.workshop.workshop.datajpa.entity.BookLoan;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface BookLoanRepository extends JpaRepository<BookLoan,Integer> {
     List<BookLoan> findByBorrowerId(Long borrowerId);

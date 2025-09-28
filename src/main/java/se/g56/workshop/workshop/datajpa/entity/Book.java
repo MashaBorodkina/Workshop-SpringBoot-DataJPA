@@ -12,7 +12,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @ToString(exclude = "authors")
 @NoArgsConstructor(access = PROTECTED)
-@RequiredArgsConstructor(access = PROTECTED)
+@RequiredArgsConstructor()
 
 public class Book {
 

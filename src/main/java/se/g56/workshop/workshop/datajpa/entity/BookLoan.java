@@ -30,6 +30,7 @@ public class BookLoan {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="user_id", nullable = false)
+    @Setter(AccessLevel.PACKAGE)
     private AppUser borrower;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

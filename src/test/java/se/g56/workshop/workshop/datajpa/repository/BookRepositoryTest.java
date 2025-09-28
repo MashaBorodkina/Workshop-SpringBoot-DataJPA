@@ -7,8 +7,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import se.g56.workshop.workshop.datajpa.entity.Book;
 import se.g56.workshop.workshop.datajpa.repo.BookRepository;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.*;
 
 @DataJpaTest

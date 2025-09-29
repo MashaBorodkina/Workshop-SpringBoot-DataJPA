@@ -13,6 +13,7 @@ import static lombok.AccessLevel.PROTECTED;
 @Getter
 @NoArgsConstructor(access = PROTECTED)
 @ToString(exclude = "writtenBooks")
+@RequiredArgsConstructor()
 
 public class Author {
     @Id
@@ -22,13 +23,15 @@ public class Author {
     private Integer id;
 
     @Column(name="first_name",  nullable = false, length = 100)
-    @Setter
+    @Setter(AccessLevel.PACKAGE)
     @NotBlank
+    @NonNull
     private String firstName;
 
     @Column(name="last_name",  nullable = false, length = 100)
-    @Setter
+    @Setter(AccessLevel.PACKAGE)
     @NotBlank
+    @NonNull
     private String lastName;
 
     @ManyToMany(mappedBy = "authors", fetch = FetchType.LAZY)

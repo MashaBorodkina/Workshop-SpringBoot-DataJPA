@@ -43,4 +43,17 @@ public class Author {
     public void removeBook(Book b) {
         if (writtenBooks.remove(b)) b.getAuthors().remove(this);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (org.hibernate.Hibernate.getClass(this) != org.hibernate.Hibernate.getClass(o)) return false;
+        Author author = (Author) o;
+        return id != null && id.equals(author.id);
+    }
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

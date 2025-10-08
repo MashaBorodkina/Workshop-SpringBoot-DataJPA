@@ -51,4 +51,16 @@ public class BookLoan {
         if (extraDays <= 0) throw new IllegalArgumentException("extraDays must be > 0");
         this.dueDate = this.dueDate.plusDays(extraDays);
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (org.hibernate.Hibernate.getClass(this) != org.hibernate.Hibernate.getClass(o)) return false;
+        BookLoan that = (BookLoan) o;
+        return id != null && id.equals(that.id);
+    }
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

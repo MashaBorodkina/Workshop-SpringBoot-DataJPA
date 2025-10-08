@@ -2,9 +2,8 @@ package se.g56.workshop.workshop.datajpa.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Set;
 
-import java.util.HashSet;
+import java.util.*;
 
 import static lombok.AccessLevel.PROTECTED;
 
@@ -49,5 +48,30 @@ public class Book {
     }
     public void removeAuthor(Author a) {
         if (authors.remove(a)) a.getWrittenBooks().remove(this);
+    }
+
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<Attachment> attachments = new ArrayList<>();
+
+    public void addAttachments(Attachment a) {
+        attachments.add(a);
+        a.setBook(this);
+    }
+    public void removeAttachments(Attachment a) {
+        attachments.remove(a);
+        a.setBook(null);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (org.hibernate.Hibernate.getClass(this) != org.hibernate.Hibernate.getClass(o)) return false;
+        Book book = (Book) o;
+        return id != null && id.equals(book.id);
+    }
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

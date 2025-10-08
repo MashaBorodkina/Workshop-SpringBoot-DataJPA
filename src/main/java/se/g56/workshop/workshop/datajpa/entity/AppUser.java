@@ -58,6 +58,20 @@ public class AppUser {
         if(!loans.contains(loan)) loans.add(loan);
         loan.setBorrower(this);
         }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (org.hibernate.Hibernate.getClass(this) != org.hibernate.Hibernate.getClass(o)) return false;
+        AppUser other = (AppUser) o;
+        return id != null && id.equals(other.id);
+        }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+        }
     }
 
 

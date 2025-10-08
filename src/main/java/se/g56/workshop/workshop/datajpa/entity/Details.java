@@ -43,4 +43,25 @@ public class Details {
     @Setter
     @NonNull
     private LocalDate birthDate;
+
+    public static Details of(String email, String name, LocalDate birthDate) {
+        Details d =  new Details();
+        d.setEmail(email);
+        d.setName(name);
+        d.setBirthDate(birthDate);
+        return d;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (org.hibernate.Hibernate.getClass(this) != org.hibernate.Hibernate.getClass(o)) return false;
+        Details details = (Details) o;
+        return id != null && id.equals(details.id);
+    }
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
